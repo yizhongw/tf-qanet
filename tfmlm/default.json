@@ -1,0 +1,82 @@
+{
+    "lstm": {
+        "use_skip_connections": true,
+        "dim": 4096,
+        "n_layers": 2,
+        "proj_clip": 3,
+        "cell_clip": 3,
+        "projection_dim": 512
+    },
+    "optimizer": "lazyadam",
+    "optimizer_list": ["adagrad", "adam", "lazyadam"],
+    
+    "learning_rate_schedule_list": [
+        "constant",
+        "warmup_cosine"
+        ],
+    "adagrad": {
+        "learning_rate_schedule": "constant",
+        "max_learning_rate": 0.2,
+        "min_learning_rate": 0.0
+    },
+    "adam": {
+        "beta1": 0.9,
+        "beta2": 0.98,
+        "epsilon": 1e-9,
+        "learning_rate_schedule": "warmup_cosine",
+        "max_learning_rate": 0.2,
+        "min_learning_rate": 0.0,
+        "warmup_steps": 2000
+    },
+    "lazyadam": {
+        "beta1": 0.9,
+        "beta2": 0.98,
+        "epsilon": 1e-9,
+        "learning_rate_schedule": "warmup_cosine",
+        "max_learning_rate": 0.2,
+        "min_learning_rate": 0.0,
+        "warmup_steps": 2000
+    },
+    "dropout": 0.1,
+    "n_train_tokens": 768648884,
+    "bidirectional": true,
+    "use_transformer": true,
+    "n_tokens_vocab": 793471,
+    "n_epochs": 10,
+    "n_negative_samples_batch": 8192,
+    "char_cnn": {
+        "activation": "relu",
+        "n_highway": 2,
+        "embedding": {
+            "dim": 16
+        },
+        "filters": [
+            [ 1, 32 ],
+            [ 2, 32 ],
+            [ 3, 64 ],
+            [ 4, 128 ],
+            [ 5, 256 ],
+            [ 6, 512 ],
+            [ 7, 1024 ]
+        ],
+        "max_characters_per_token": 50,
+        "n_characters": 262
+    },
+    "all_clip_norm_val": 10.0,
+    "num_context_steps": 64,
+    "batch_size": 8,
+    "scale_embeddings": false,
+    "transformer": {
+        "hidden_size": 512,
+        "residual_dropout": 0.1,
+        "attention_dropout": 0.1,
+        "layer_preprocess": "layer_norm",
+        "num_decoder_layers": 8,
+        "num_heads": 8,
+        "max_relative_dist": 16,
+        "filter_size": 2048,
+        "relu_dropout": 0.1,
+        "no_additional_dropout": true
+    },
+    "unroll_steps": 256
+}
